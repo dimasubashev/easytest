@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ExchangeRequest;
 use App\Models\Exchange;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -18,9 +16,6 @@ class ExchangeController extends Controller
      */
     public function index(Request $request)
     {
-//        $from = $request->query('from');
-//        $to = $request->query('to');
-//        $amount = $request->query('amount');
         $qparam = $request->all();
         $from = $qparam['from'];
         $to = $qparam['to'];
@@ -60,7 +55,6 @@ class ExchangeController extends Controller
     public function create()
     {
         //
-        return "crete DIMA";
     }
 
     /**
@@ -72,7 +66,6 @@ class ExchangeController extends Controller
     public function store(Request $request)
     {
         //
-        return "store DIMA";
     }
 
     /**
@@ -84,7 +77,6 @@ class ExchangeController extends Controller
     public function show(Exchange $exchange)
     {
         //
-        return "show DIMA";
     }
 
     /**
@@ -96,7 +88,6 @@ class ExchangeController extends Controller
     public function edit(Exchange $exchange)
     {
         //
-        return "edit DIMA";
     }
 
     /**
@@ -109,7 +100,6 @@ class ExchangeController extends Controller
     public function update(Request $request, Exchange $exchange)
     {
         //
-        return "update DIMA";
     }
 
     /**
@@ -121,6 +111,5 @@ class ExchangeController extends Controller
     public function destroy(Exchange $exchange)
     {
         //
-        return "destroy DIMA";
     }
 }
