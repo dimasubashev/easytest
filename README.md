@@ -62,3 +62,116 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Setup Project from Repository
+
+Clone project from: **[Repo](https://github.com/dimasubashev/easytest)** in to your wsl Docker folder 
+EX. \\wsl$\Ubuntu\home\[username]
+
+## Get Sail
+
+Get to project folder and run this command :
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+
+## Start Sail to build the container
+
+./vendor/bin/sail up -d 
+
+## Make alias for sail 
+
+ - 	alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'  
+ OR
+ - vi ~/.bashrc  // open bashrc file to edit it.
+ - add  next text at the end of the file :( alias sail='bash vendor/bin/sail' )
+ - . ~/bashrc   // applay the changes 
+
+- sail down   // to close container
+- sail up -d  // start the container
+
+
+## Set the .env file in the project
+
+- Make copy of .env.example file  and rename it to .env
+- set the necessary data in it or you can just copy and set the default sail settings that are coming with the laravel sail installation (at the bottom of the file you have working Fixer.io API_KEY) :
+
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:d1gJh8v3J0OZPRB2sPsVxEbXG8YAs56pXstf4umYAV8=
+APP_DEBUG=true
+APP_URL=http://example-app.test
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=example_app
+DB_USERNAME=sail
+DB_PASSWORD=password
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=memcached
+
+REDIS_HOST=redis
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+SCOUT_DRIVER=meilisearch
+MEILISEARCH_HOST=http://meilisearch:7700
+
+FIXER_API_KEY="01AyGxRkBSXtTnNG65tePb2KqoDkrK7M"
+
+## Create Project DB
+
+- run:  
+sail artisan migrate
+
+- this will create the db in your docker mysql
+- to get to the DB  you can connect to it using you Workbech or some other tool:
+ Create new connection  where:
+    Hostname: localhost
+    Username: sail
+    Password: Password
+
+ - all this data are taken from the .env file
+
+ ## API request url
+ 
+ - after sail up is running we can use Postman to test our GET Api call : /api/exchange?from=EUR&to=MKD&amount=2
+ EX. http://localhost/api/exchange?from=EUR&to=MKD&amount=55
